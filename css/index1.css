@@ -1,0 +1,8 @@
+.box{width:80%;margin:0 auto;font-size:.8em;}
+		label{display:block;position:relative;}
+		label{padding:5px;}
+		label>input,label>span{padding-left:12px;width:19%;}
+		label>input{left:48%;top:5px;position:absolute;}
+		label>span{position:absolute;left:78%;}
+		.error{color:red;}
+		.right{color:green;}

@@ -1,0 +1,13 @@
+	ul,ol{list-style-type:none;}
+		.box{width:96%;margin:0 auto;font-size:.8em;}
+		.title{padding-bottom:20px;border-bottom:1px red double;text-align:center;}		
+		.items>ul{padding-bottom:10px;border-bottom:1px green dashed;}
+		.items li{margin:5px;margin-left:-10px;padding-right:8%;position:relative;}		
+		.items li>input,.items li>span{padding-left:10px;}
+		.items li>input{width:18px;margin-right:4px;}
+		.items li>span{position:absolute;right:-1px;}
+		.items li>i:before{content:"-";position:absolute;left:-10px;}
+		.items>ul>li:first-child{margin-left:-32px;font-weight:700;font-size:14px;}		
+		.error{color:red;}
+		.right{color:green;}
+		
