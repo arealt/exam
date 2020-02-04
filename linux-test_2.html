@@ -4,9 +4,22 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-	<link rel="stylesheet" href="./css/index2.css">
 	<title></title>
-
+	<style>
+	ul,ol{list-style-type:none;}
+		.box{width:96%;margin:0 auto;font-size:.8em;}
+		.title{padding-bottom:20px;border-bottom:1px red double;text-align:center;}		
+		.items>ul{padding-bottom:10px;border-bottom:1px green dashed;}
+		.items li{margin:5px;margin-left:-10px;padding-right:8%;position:relative;}		
+		.items li>input,.items li>span{padding-left:10px;}
+		.items li>input{width:18px;margin-right:4px;}
+		.items li>span{position:absolute;right:-1px;}
+		.items li>i:before{content:"-";position:absolute;left:-10px;}
+		.items>ul>li:first-child{margin-left:-32px;font-weight:700;font-size:14px;}		
+		.error{color:red;}
+		.right{color:green;}
+		
+	</style>
   </head>
   <body>
     <div class='box' >
@@ -23,5 +36,65 @@
 	  <div style="text-align:center;">辛苦了，休息一下！</div>
     </div>
   </body>
-<script src="./js/index2.js"></script>
+  <script>
+	//obj.setAttribute('data','p');
+	let items=document.querySelector(".items");
+	let data = [
+    { pwd: "显示当前工作目录", P: "显示正确完整的路径(不是以link档显示)" },
+    { mkdir: "创建新目录", m: "配置文件权限,不看预设(umask)权限", p: "将所有的目录(包含上层目录)建立" },
+    {rmdir:"删除空目录",p:"连同『上层』『空的』目录也一起删除"},
+    { ls: "查看目录清单", a: "全部的文件，连同隐藏文件一起列出来", d: "仅列出目录本身，而不列出其他数据",l:"包含文件的属性与权限等"},
+	{cp:"复制文件或目录 (要有read 权限)",a:"保留源文件和目录属性(包括连接)并递归",i:"若文件已存在，覆盖会先进行询问",p:"连同文件的属性(权限、时间)复制过去",r:"递归持续复制，用于目录的复制行为"},
+	{rm:"移除文件或目录",f:"就是force的意思，不会出现警告讯息",i:"互动模式，在删除前会询问",r:"递归删除,危险，请慎用！！！"},
+	{mv:"移动文件与目录，或更名",f:"force 强制的意思，不会询问而直接覆盖",i:"若目标文件已经存在时，会询问是否覆盖",u:"若目标已经存在且source比较新，才更新"},
+	{cat:"文件内容查阅",n:"打印出行号，连同空白行也会有行号",v:"列出一些看不出来的特殊字符"},	
+    {chgrp:"改变所属群组",R:"进行递归(recursive)。"},
+    {chown:"改变文件拥有者",R:"进行递归(recursive)"},
+    {chmod:"改变权限",R:"进行递归(recursive)}"},
+    {uname:"显示系统信息",r:"查看核心版本",m:"查看操作系统位数"}
+
+
+
+];
+	
+	function init(){
+		data.map((val)=>{
+			//console.log(val)
+			let ul=document.createElement('ul');
+			for(let key in val){				
+				let li=document.createElement('li');
+				let reg=/^[a-zA-Z]{2,}$/
+				if(reg.test(key)){
+					li.innerText=key+val[key];
+				}else{
+					li.innerHTML=`<i></i><input type="text" data=${key}  />${val[key]}<span></span>`
+				}
+				ul.appendChild(li);
+			}
+			items.appendChild(ul);	
+				
+			})	
+	}
+	init();
+	test();
+	function test(){
+	  let inputs=document.querySelectorAll('input');
+	  for(let i=0;i<inputs.length;i++){
+		inputs[i].onblur=(e)=>{
+		  let that=e.srcElement;		  
+		  let data=that.getAttribute('data');
+		  //console.log(data);
+		  console.log(data==that.value.trim());
+		  if(data==that.value.trim()){
+			that.nextSibling.nextSibling.innerHTML="正确";
+			that.nextSibling.nextSibling.className="right";
+		  }else{
+		    that.nextSibling.nextSibling.innerHTML="错误";
+			that.nextSibling.nextSibling.className="error";
+			}
+		}
+	  }
+	}
+	
+  </script>
 <html>
